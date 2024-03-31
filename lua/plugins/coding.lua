@@ -91,6 +91,11 @@ return {
     "nvim-cmp",
     dependencies = { "hrsh7th/cmp-emoji" },
     opts = function(_, opts)
+      table.insert(opts.sources, 1, {
+        name = "codeium",
+        group_index = 1,
+        priority = 100,
+      })
       table.insert(opts.sources, { name = "emoji" })
     end,
   },
