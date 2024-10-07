@@ -14,6 +14,20 @@ return {
     opts = { snippet_engine = "luasnip" },
   },
 
+  -- supermaiven
+  {
+    "supermaven-inc/supermaven-nvim",
+    config = function()
+      require("supermaven-nvim").setup({
+        keymaps = {
+          accept_suggestion = "<C-e>",
+          clear_suggestion = "<C-]>",
+          accept_word = "<C-j>",
+        },
+      })
+    end,
+  },
+
   -- Incremental rename
   {
     "smjonas/inc-rename.nvim",
@@ -92,11 +106,16 @@ return {
     dependencies = { "hrsh7th/cmp-emoji" },
     opts = function(_, opts)
       table.insert(opts.sources, 1, {
-        name = "codeium",
-        group_index = 1,
-        priority = 100,
+        -- name = "supermaven",
+        -- group_index = 1,
+        -- priority = 100,
       })
       table.insert(opts.sources, { name = "emoji" })
     end,
+  },
+
+  {
+    "williamboman/mason.nvim",
+    opts = { ensure_installed = { "prettier" } },
   },
 }
