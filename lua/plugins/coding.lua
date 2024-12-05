@@ -20,7 +20,7 @@ return {
     config = function()
       require("supermaven-nvim").setup({
         keymaps = {
-          accept_suggestion = "<C-f>",
+          accept_suggestion = "<Tab>",
           clear_suggestion = "<C-]>",
           accept_word = "<C-j>",
         },
@@ -105,12 +105,18 @@ return {
     "nvim-cmp",
     dependencies = { "hrsh7th/cmp-emoji" },
     opts = function(_, opts)
+      local cmp = require("cmp")
       table.insert(opts.sources, 1, {
         -- name = "supermaven",
         -- group_index = 1,
         -- priority = 100,
       })
       table.insert(opts.sources, { name = "emoji" })
+      opts.mapping = vim.tbl_extend("force", opts.mapping, {
+        ["<C-e>"] = cmp.mapping.complete(), -- Manually open autocomplete
+        ["<C-E>"] = cmp.mapping.abort(), -- Close autocomplete menu
+        ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Confirm selection
+      })
     end,
   },
 
